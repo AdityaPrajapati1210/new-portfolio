@@ -83,15 +83,15 @@ window.addEventListener('scroll', () => {
 
 // --- Particles/Bubbles Logic ---Generation & Movement
 const skillsData = [
-    { name: 'Python', icon: 'fab fa-python', top: '10%', left: '20%' },
+    { name: 'Python', icon: 'fab fa-python', top: '10%', left: '0%' },
     { name: 'DSA', icon: 'fas fa-brain', top: '30%', left: '60%' },
     { name: 'React', icon: 'fab fa-react', top: '20%', left: '80%' },
-    { name: 'CPP', icon: 'fas fa-code', top: '50%', left: '15%' },
-    { name: 'MySQL', icon: 'fas fa-database', top: '70%', left: '40%' },
-    { name: 'Git', icon: 'fab fa-git-alt', top: '15%', left: '45%' },
+    { name: 'CPP', icon: 'fas fa-code', top: '40%', left: '5%' },
+    { name: 'MySQL', icon: 'fas fa-database', top: '60%', left: '40%' },
+    { name: 'Git', icon: 'fab fa-git-alt', top: '5%', left: '45%' },
     { name: 'C', icon: 'fas fa-microchip', top: '60%', left: '75%' },
-    { name: 'JavaScript', icon: 'fab fa-js', top: '40%', left: '30%' },
-    { name: 'HTML5', icon: 'fab fa-html5', top: '75%', left: '10%' },
+    { name: 'JavaScript', icon: 'fab fa-js', top: '30%', left: '30%' },
+    { name: 'HTML5', icon: 'fab fa-html5', top: '75%', left: '5%' },
     { name: 'CSS', icon: 'fab fa-css3-alt', top: '80%', left: '60%' }
 ];
 
