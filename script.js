@@ -1,3 +1,64 @@
+// Theme Toggle Logic
+function initTheme() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark-mode') {
+        body.classList.add('dark-mode');
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const isDark = body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark-mode' : 'light-mode');
+        });
+    }
+}
+
+// Initialize everything
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    createBubbles();
+    initMobileMenu();
+    initCertFilters();
+});
+
+// Mobile Menu logic
+function initMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navLinksContainer = document.querySelector('.nav-links');
+    const links = document.querySelectorAll('.nav-links a');
+
+    if (hamburger && navLinksContainer) {
+        hamburger.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+
+            // Toggle hamburger icon
+            const icon = hamburger.querySelector('i');
+            if (navLinksContainer.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when a link is clicked
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinksContainer.classList.remove('active');
+                const icon = hamburger.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+    }
+}
+
+
 // Smooth Scroll and Active Link
 const navLinks = document.querySelectorAll('.nav-links a');
 const sections = document.querySelectorAll('section');
@@ -20,19 +81,18 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Skills Bubbles Generation & Movement
+// --- Particles/Bubbles Logic ---Generation & Movement
 const skillsData = [
     { name: 'Python', icon: 'fab fa-python', top: '10%', left: '20%' },
     { name: 'DSA', icon: 'fas fa-brain', top: '30%', left: '60%' },
     { name: 'React', icon: 'fab fa-react', top: '20%', left: '80%' },
-    { name: 'CPP', icon: 'fas fa-camera', top: '50%', left: '15%' },
+    { name: 'CPP', icon: 'fas fa-code', top: '50%', left: '15%' },
     { name: 'MySQL', icon: 'fas fa-database', top: '70%', left: '40%' },
     { name: 'Git', icon: 'fab fa-git-alt', top: '15%', left: '45%' },
     { name: 'C', icon: 'fas fa-microchip', top: '60%', left: '75%' },
     { name: 'JavaScript', icon: 'fab fa-js', top: '40%', left: '30%' },
     { name: 'HTML5', icon: 'fab fa-html5', top: '75%', left: '10%' },
-    { name: 'CSS', icon: 'fab fa-css3-alt', top: '80%', left: '60%' },
-    { name: 'JavaScript', icon: 'fab fa-css3-alt', top: '10%', left: '70%' }
+    { name: 'CSS', icon: 'fab fa-css3-alt', top: '80%', left: '60%' }
 ];
 
 const bubbleContainer = document.getElementById('bubbles-container');
@@ -68,63 +128,68 @@ styleSheet.innerText = `
 `;
 document.head.appendChild(styleSheet);
 
-createBubbles();
-
 // Contact Form Handling
 emailjs.init("OQsoXfPQn7D6fNAjI");
 
-  const form = document.getElementById("contact-form");
+const form = document.getElementById("contact-form");
 
-  form.addEventListener("submit", function (e) {
+form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Send to YOU
     emailjs.sendForm(
-      "service_aditya",
-      "template_hp0lur4",
-      this
+        "service_aditya",
+        "template_hp0lur4",
+        this
     );
 
     // Auto reply to USER
     emailjs.sendForm(
-      "service_aditya",
-      "template_wj2x407",
-      this
+        "service_aditya",
+        "template_wj2x407",
+        this
     ).then(() => {
-      alert("Message sent successfully! 📩 Check your email.");
-      form.reset();
+        alert("Message sent successfully! 📩 Check your email.");
+        form.reset();
     }).catch(err => {
-      alert("Failed ❌ " + err.text);
+        alert("Failed ❌ " + err.text);
     });
-  });
+});
 
 // Certificates Filtering
-const filterBtns = document.querySelectorAll('.filter-btn');
-const certCards = document.querySelectorAll('.cert-card');
+function initCertFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const certCards = document.querySelectorAll('.cert-card');
 
-if (filterBtns.length > 0) {
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Update active button
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const filter = btn.innerText;
-
-            // Filter cards
+    if (filterBtns.length > 0) {
+        // Function to perform filtering
+        const applyFilter = (filterText) => {
             certCards.forEach(card => {
                 const category = card.getAttribute('data-category');
-                if (category === filter) {
+                if (category === filterText) {
                     card.style.display = 'flex';
-                    // Trigger simple fade in
-                    card.style.opacity = '0';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                    }, 50);
+                    card.style.opacity = '1';
                 } else {
                     card.style.display = 'none';
                 }
             });
+        };
+
+        // Initial filter based on active button
+        const activeBtn = document.querySelector('.filter-btn.active');
+        if (activeBtn) {
+            applyFilter(activeBtn.innerText);
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.innerText;
+                applyFilter(filter);
+            });
         });
-    });
+    }
 }

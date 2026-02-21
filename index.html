@@ -21,7 +21,6 @@
                 <span class="initials">AKP</span>
                 <div class="logo-text">
                     <span class="name">Aditya Kumar Prajapti</span>
-                    <span class="title">MERN stack Developer</span>
                 </div>
             </div>
             <ul class="nav-links">
@@ -34,6 +33,18 @@
                 <li><a href="#about">About me</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="nav-right">
+                <div class="theme-toggle-wrapper">
+                    <button id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </div>
+                <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
         </nav>
     </header>
 
@@ -43,6 +54,9 @@
             <div class="hero-content">
                 <div class="portrait-container">
                     <div class="portrait-glow"></div>
+                    <div class="floating-shape shape-1"></div>
+                    <div class="floating-shape shape-2"></div>
+                    <div class="floating-shape shape-3"></div>
                     <img src="image/profile.png" alt="AKP.image" class="portrait">
                 </div>
                 <div class="hero-text">
@@ -260,9 +274,11 @@
             <div class="section-header">
                 <h2>Skills</h2>
             </div>
-            <div class="skills-visual">
-                <div class="bubbles-container" id="bubbles-container">
-                    <!-- Bubbles will be generated/managed by JS for float effect -->
+            <div class="glass-box skill-visual-box">
+                <div class="skills-visual">
+                    <div class="bubbles-container" id="bubbles-container">
+                        <!-- Bubbles will be generated/managed by JS for float effect -->
+                    </div>
                 </div>
             </div>
             <div class="skills-lists">
@@ -330,7 +346,7 @@
                     <div class="cert-info">
                         <h4>Hackathon</h4>
                         <p>Hackkrmu 5.0 -KR Mangalam University</p>
-                        <a href="certificate/astrovega.jpg" class="btn-tiny">View</a>
+                        <a href="certificates/astrovega.jpg" class="btn-tiny">View</a>
                     </div>
                 </div>
                 <div class="cert-card" data-category="Tech">
@@ -338,7 +354,7 @@
                     <div class="cert-info">
                         <h4>Astrovega Aviation Private Limited! </h4>
                         <p>Robotics Workshop</p>
-                        <a href="certificate/astrovega.jpg" class="btn-tiny">View</a>
+                        <a href="certificates/astrovega.jpg" class="btn-tiny">View</a>
                     </div>
                 </div>
                 <div class="cert-card" data-category="Tech">
@@ -346,7 +362,7 @@
                     <div class="cert-info">
                         <h4> NS3EDU! </h4>
                         <p>30-hour training program in Web Development </p>
-                        <a href="certificate/web dev.jpg" class="btn-tiny">View</a>
+                        <a href="certificates/web dev.jpg" class="btn-tiny">View</a>
                     </div>
                 </div>
                 <div class="cert-card" data-category="Tech">
@@ -354,7 +370,7 @@
                     <div class="cert-info">
                         <h4> Kreativan Technologies.</h4>
                         <p>40-hour vocational training program in Web Development</p>
-                        <a href="certificate/web_dev.jpg" class="btn-tiny">View</a>
+                        <a href="certificates/web_dev.jpg" class="btn-tiny">View</a>
                     </div>
                 </div>
                 <div class="cert-card" data-category="Tech">
@@ -362,7 +378,7 @@
                     <div class="cert-info">
                         <h4> C Course - Code Tantra </h4>
                         <p> Certificate of Completion</p>
-                        <a href="certificate/c_course.jpg" class="btn-tiny">View</a>
+                        <a href="certificates/c_course.jpg" class="btn-tiny">View</a>
                     </div>
                 </div>
                 <div class="cert-card" data-category="Others">
@@ -370,7 +386,7 @@
                     <div class="cert-info">
                         <h4> Network Bulls </h4>
                         <p> Best Performance at Industries Visit</p>
-                        <a href="certificate/nb.jpg" class="btn-tiny">View</a>
+                        <a href="certificates/nb.jpg" class="btn-tiny">View</a>
                     </div>
                 </div>
                 <!-- Others Certificates -->
@@ -399,29 +415,32 @@
                 <h2>About Me</h2>
                 <p>A glimpse into who I am beyond the code.</p>
             </div>
-            <div class="about-container">
-                <div class="about-text">
-                    <p>Computer Science Engineering student with strong proficiency in Data Structures & Algorithms
-                        using C++, focused on writing optimized and efficient code.</p>
-                    <p>Full Stack Developer specializing in the MERN Stack (MongoDB, Express.js, React.js, Node.js),
-                        building scalable and responsive web applications.</p>
-                    <p>Passionate about problem-solving, continuous learning, and applying technical skills to
-                        real-world projects.</p>
-                    <p>Aspiring Software Developer seeking opportunities to contribute to impactful products and grow in
-                        a dynamic tech environment.</p>
-                </div>
-                <div class="about-details">
-                    <div class="about-item">
-                        <span class="label">Name:</span>
-                        <span class="value">Aditya Kumar Prajapati</span>
+            <div class="glass-box about-box">
+                <div class="about-container">
+                    <div class="about-text">
+                        <p>Computer Science Engineering student with strong proficiency in Data Structures & Algorithms
+                            using C++, focused on writing optimized and efficient code.</p>
+                        <p>Full Stack Developer specializing in the MERN Stack (MongoDB, Express.js, React.js, Node.js),
+                            building scalable and responsive web applications.</p>
+                        <p>Passionate about problem-solving, continuous learning, and applying technical skills to
+                            real-world projects.</p>
+                        <p>Aspiring Software Developer seeking opportunities to contribute to impactful products and
+                            grow in
+                            a dynamic tech environment.</p>
                     </div>
-                    <div class="about-item">
-                        <span class="label">Email:</span>
-                        <span class="value">aditya20051012@gmail.com</span>
-                    </div>
-                    <div class="about-item">
-                        <span class="label">Availability:</span>
-                        <span class="value">Freelance / Open to Opportunities</span>
+                    <div class="about-details">
+                        <div class="about-item">
+                            <span class="label">Name:</span>
+                            <span class="value">Aditya Kumar Prajapati</span>
+                        </div>
+                        <div class="about-item">
+                            <span class="label">Email:</span>
+                            <span class="value">aditya20051012@gmail.com</span>
+                        </div>
+                        <div class="about-item">
+                            <span class="label">Availability:</span>
+                            <span class="value">Freelance / Open to Opportunities</span>
+                        </div>
                     </div>
                 </div>
             </div>
