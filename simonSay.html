@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simon Says Game</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(135deg,#1e293b,#0f172a,#111827);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:95%;
+    max-width:1200px;
+    height:90vh;
+    display:flex;
+    gap:35px;
+}
+
+.game{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+}
+
+.game h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.game h3{
+    color:#d1d5db;
+    margin-bottom:30px;
+    font-weight:400;
+}
+
+.btn-container{
+    display:grid;
+    grid-template-columns:repeat(2,140px);
+    gap:18px;
+}
+
+.btn{
+    width:140px;
+    height:140px;
+    border-radius:22px;
+    border:5px solid white;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+}
+
+.red{
+    background:#ff4d6d;
+}
+
+.green{
+    background:#38d39f;
+}
+
+.blue{
+    background:#4ea8ff;
+}
+
+.yellow{
+    background:#ffd60a;
+}
+
+.white{
+    background:white !important;
+}
+
+.rules{
+    width:340px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:30px;
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.rules h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#ffd60a;
+}
+
+.rules ul{
+    list-style:none;
+}
+
+.rules li{
+    margin:18px 0;
+    line-height:1.7;
+    color:#f3f4f6;
+    font-size:17px;
+}
+
+.rules li::before{
+    content:"✔ ";
+    color:#38d39f;
+    font-weight:bold;
+}
+
+.tip{
+    margin-top:25px;
+    padding:15px;
+    border-radius:15px;
+    background:rgba(255,214,10,.15);
+    border-left:4px solid #ffd60a;
+}
+
+.tip b{
+    color:#ffd60a;
+}
+
+@media(max-width:900px){
+
+    body{
+        overflow:auto;
+    }
+
+    .container{
+        flex-direction:column;
+        height:auto;
+        padding:20px 0;
+    }
+
+    .rules{
+        width:100%;
+    }
+
+    .btn-container{
+        grid-template-columns:repeat(2,110px);
+    }
+
+    .btn{
+        width:110px;
+        height:110px;
+    }
+
+    .game h1{
+        font-size:34px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="game">
+        <h1>🎮 Simon Says</h1>
+        <h3>Press any key to start the game</h3>
+
+        <div class="btn-container">
+            <div class="btn red" id="red"></div>
+            <div class="btn green" id="green"></div>
+            <div class="btn yellow" id="yellow"></div>
+            <div class="btn blue" id="blue"></div>
+        </div>
+    </div>
+
+    <div class="rules">
+        <h2>📜 Game Rules</h2>
+
+        <ul>
+            <li>Press any key to start the game.</li>
+            <li>Watch the color that flashes.</li>
+            <li>Click the colors in the same order.</li>
+            <li>Each level adds one new color.</li>
+            <li>Repeat the complete sequence correctly.</li>
+            <li>If you click the wrong color, the game ends.</li>
+            <li>Try to reach the highest level!</li>
+        </ul>
+
+        <div class="tip">
+            <b>💡 Tip:</b><br>
+            Memorize the pattern instead of individual colors. The sequence gets longer every level.
+        </div>
+    </div>
+
+</div>
+
+<script>
+    let gameArr = [];
+let userArr = [];
+
+let gamestart = false;
+let h3 = document.querySelector("h3");
+let color = ["yellow" ,"blue","red","green"];
+
+let level = 0;
+// start the game by pressing any key
+document.addEventListener("keypress" , ()=>{
+    if(gamestart == false){
+        console.log("Game is started");
+        gamestart = true;
+        levelup();
+    }
+})
+
+function gameflash(btn){
+    btn.classList.add("white");
+    setTimeout(function(){
+        btn.classList.remove("white")
+    },300);
+}
+function userflash(btn){
+    btn.classList.add("white");
+    setTimeout(function(){
+        btn.classList.remove("white")
+    },300);
+}
+
+// btn press by user
+function levelup(){
+    level++;
+    h3.innerText = `Level ${level}`;
+
+    let ranidx = Math.floor(Math.random()*4);
+    let ranclr = color[ranidx];
+    let btn = document.querySelector(`.${ranclr}`);
+    gameflash(btn);
+    gameArr.push(ranclr);
+    userArr = [];
+};
+
+function checkClick(idx){
+   if(gameArr[idx] === userArr[idx]){
+        console.log("same value");
+        if(userArr.length == gameArr.length){
+            setTimeout(levelup, 1000);
+            
+        }
+   }else{
+        h3.innerText = `game over! You reach level ${level}.... Press any key to start the game. `;
+        level = 0;
+        userArr = [];
+        gameArr = [];
+        gamestart = false;
+   }
+}
+
+function btnpress(){
+    let btn = this;
+    userflash(btn);
+
+    console.log(btn);
+    let color = btn.getAttribute("id");
+    userArr.push(color);
+
+    checkClick(userArr.length-1);
+
+}
+
+// select all buttons
+let btns = document.querySelectorAll(".btn");
+for(let btn of btns){
+    btn.addEventListener("click",btnpress);
+}
+
+
+</script>
+
+</body>
+</html>
